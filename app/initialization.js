@@ -46,14 +46,22 @@ exports.init = function() {
 		notifier.throwAppError(e.stack);
 	});
 
-    $( "input[type=submit], a, button" )
-      .button()
+	global.debug("IN init of initialization");
+	
+
+    /*$("input[type=submit], button" ).button()
       .click(function( event ) {
+	    global.debug("click");
         event.preventDefault();
       });
+	  */
 	
 	//rander main window view
 	renderMainWindow();
+
+	$( "button" ).button();
+
+	$( "#radio" ).buttonset();
 
 	mainWindow.show();
 }

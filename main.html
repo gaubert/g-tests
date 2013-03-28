@@ -10,10 +10,22 @@
 <body>
 	<div id="window">
 		<!--render content here-->
-        Hello World !
 	</div>
 	<!--<div class="dragover-overlay" id="dragover-overlay"></div>-->
-
 	<script type="text/javascript" src="app/main.js"></script>
+	<button>NButton label</button>
+
+	<div id="radio">
+	  <input type="radio" id="radio1" name="radio"><label for="radio1">NChoice 1</label>
+	  <input type="radio" id="radio2" name="radio" checked="checked"><label for="radio2">NChoice 2</label>
+	  <input type="radio" id="radio3" name="radio"><label for="radio3">NChoice 3</label>
+	</div>
+
+	<script type="text/javascript">
+	   $( "button" ).button();
+
+	   $( "#radio" ).buttonset();
+	</script>
+
 </body>
 </html>
