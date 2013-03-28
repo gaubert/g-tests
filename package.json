@@ -1,0 +1,39 @@
+{
+  "main": "main.html",
+  "name": "GmvaultGLUE",
+  "description": "This is an experimentation with Gmvault.",
+  "version": "0.0.1",
+  "keywords": [ "email", "gmail" ],
+  "maintainers":{
+    "name": "Guillaume Aubert",
+    "email": "guillaume.aubert@gmail.com",
+    "web": "http://www.gmvault.org",
+    "project": "https://github.com/gaubert/gmvault",
+    "issues": "https://github.com/gaubert/gmvault/issues",
+    "upgrade": "https://raw.github.com/oklai/koala/master/src/upgrade/upgrade.json"
+  },
+  "window": {
+    "icon": "img/koala.png",
+    "toolbar": false,
+    "width": 900,
+    "height": 556,
+    "resizable": false,
+    "position": "center",
+    "show": true
+  },
+  "appinfo": {
+    "debug": false,
+    "less": "1.3.3",
+    "sass": "3.2.7",
+    "compass": "0.12.2",
+    "coffeescript": "1.6.1"
+  },
+  "licenses": [{
+    "type": "AGPL v3",
+    "url": "http://www.apache.org/licenses/LICENSE-2.0"
+  }],
+  "repositories": [{
+    "type": "git", 
+    "url": ""
+  }]
+}
