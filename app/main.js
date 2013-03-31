@@ -31,42 +31,5 @@ global.activeProject = '';
 //distinguish between different platforms
 $('body').addClass(process.platform);
 
-// added for testing
-var fs             = require('fs');
-
-	//Add error event listener
-	process.on('uncaughtException', function(e) {
-		global.mainWindow.show();
-		notifier.throwAppError(e.stack);
-	});
-	
-	global.debug("ui loaded ? " + $.ui.version + " End.");
-	global.debug("IN init of initialization");
-	
-	var button = $("#divButton").button();
-	
-	button.click(function (event) {
-	    global.debug("divButton click");
-	});
-	
-	$('button').button();
-	
-	$("button").click(function (event) {
-	    global.debug("on button click");
-	});
-
-    /*$("input[type=submit], button" ).button()
-      .click(function( event ) {
-	    global.debug("click");
-        event.preventDefault();
-      });
-	  */
-	
-	//rander main window view
-	renderMainWindow();
-
-	global.mainWindow.show();
-
-require('./app/my_init.js').init();
 //Application initialization
-//require('./app/initialization.js').init();
+require('./app/initialization.js').init();

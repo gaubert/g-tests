@@ -4,7 +4,7 @@
 
 'use strict';
 
-var fs             = require('fs');
+ var fs             = require('fs');
 	/* appConfig      = require('./appConfig.js'), */
 	/* storage        = require('./storage.js'), */
 	/* jadeManager    = require('./jadeManager.js'), */
@@ -14,7 +14,7 @@ var fs             = require('fs');
 	/* util           = require('./util.js'); */
 
 /* var	historyDb      = storage.getHistoryDb(), */
-	$              = global.jQuery;
+ var $              = global.jQuery;
 
 //share global context
 /* global.appConfig = appConfig; */
@@ -46,19 +46,36 @@ exports.init = function() {
 		notifier.throwAppError(e.stack);
 	});
 	
+	//rander main window view
+	renderMainWindow();
+	
 	global.debug("ui loaded ? " + $.ui.version + " End.");
 	global.debug("IN init of initialization");
 	
 	$("#divButton").button();
 	
 	$("#divButton").click(function (event) {
-	    global.debug("click");
+	    global.debug("on div buttonclick");
+	    var spawn = require('child_process').spawn,
+                    ls    = spawn('ls', ['-lh', '/usr']);
+
+        ls.stdout.on('data', function (data) {
+            global.debug('stdout: ' + data);
+        });
+
+        ls.stderr.on('data', function (data) {
+            global.debug('stderr: ' + data);
+        });
+
+        ls.on('close', function (code) {
+            global.debug('child process exited with code ' + code);
+        });
 	});
 	
 	$('button').button();
 	
 	$("button").click(function (event) {
-	    global.debug("on button click");
+	    global.debug("on hello button click");
 	});
 
     /*$("input[type=submit], button" ).button()
@@ -68,8 +85,7 @@ exports.init = function() {
       });
 	  */
 	
-	//rander main window view
-	renderMainWindow();
+	
 
 	mainWindow.show();
 }
