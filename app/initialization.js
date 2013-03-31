@@ -4,7 +4,7 @@
 
 'use strict';
 
-var fs             = require('fs'),
+var fs             = require('fs');
 	/* appConfig      = require('./appConfig.js'), */
 	/* storage        = require('./storage.js'), */
 	/* jadeManager    = require('./jadeManager.js'), */
@@ -45,9 +45,21 @@ exports.init = function() {
 		mainWindow.show();
 		notifier.throwAppError(e.stack);
 	});
-
+	
+	global.debug("ui loaded ? " + $.ui.version + " End.");
 	global.debug("IN init of initialization");
 	
+	$("#divButton").button();
+	
+	$("#divButton").click(function (event) {
+	    global.debug("click");
+	});
+	
+	$('button').button();
+	
+	$("button").click(function (event) {
+	    global.debug("on button click");
+	});
 
     /*$("input[type=submit], button" ).button()
       .click(function( event ) {
@@ -58,10 +70,6 @@ exports.init = function() {
 	
 	//rander main window view
 	renderMainWindow();
-
-	$( "button" ).button();
-
-	$( "#radio" ).buttonset();
 
 	mainWindow.show();
 }
