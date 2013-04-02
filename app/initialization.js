@@ -4,7 +4,9 @@
 
 'use strict';
 
- var fs             = require('fs');
+ var fs              = require('fs');
+ var gmvault_command = require('./gmvault_command.js');
+ 
 	/* appConfig      = require('./appConfig.js'), */
 	/* storage        = require('./storage.js'), */
 	/* jadeManager    = require('./jadeManager.js'), */
@@ -52,40 +54,12 @@ exports.init = function() {
 	global.debug("ui loaded ? " + $.ui.version + " End.");
 	global.debug("IN init of initialization");
 	
-	$("#divButton").button();
+	$("#mButton").button();
 	
-	$("#divButton").click(function (event) {
-	    global.debug("on div buttonclick");
-	    var spawn = require('child_process').spawn,
-                    ls    = spawn('ls', ['-lh', '/usr']);
-
-        ls.stdout.on('data', function (data) {
-            global.debug('stdout: ' + data);
-        });
-
-        ls.stderr.on('data', function (data) {
-            global.debug('stderr: ' + data);
-        });
-
-        ls.on('close', function (code) {
-            global.debug('child process exited with code ' + code);
-        });
+	$("#mButton").click(function (event) {
+	    global.debug("on mbutton click");
+	    gmvault_command.run("sync", ["guillaume.aubert@gmail.com", "--chats-only", "-c", "no"]);
 	});
-	
-	$('button').button();
-	
-	$("button").click(function (event) {
-	    global.debug("on hello button click");
-	});
-
-    /*$("input[type=submit], button" ).button()
-      .click(function( event ) {
-	    global.debug("click");
-        event.preventDefault();
-      });
-	  */
-	
-	
 
 	mainWindow.show();
 }
