@@ -10,6 +10,8 @@
  
  
  var $              = global.jQuery;
+
+ var cpt            = 0;
  
  /**
   * run the gmvault command
@@ -31,6 +33,10 @@
 
         gmv.stderr.on('data', function (data) {
             global.debug('stderr: ' + data);
+            var val = $("#mTextArea").val();
+			$("#mTextArea").val('[stderr]:' + data + val);
+            //$("#mTextArea").val("Hello" + cpt + "//" + val);
+			//cpt = cpt + 1;
         });
 
         gmv.on('close', function (code) {
