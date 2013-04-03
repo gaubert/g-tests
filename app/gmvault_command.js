@@ -29,6 +29,8 @@
 
         gmv.stdout.on('data', function (data) {
             global.debug('stdout: ' + data);
+            var val = $("#mTextArea").val();
+			$("#mTextArea").val('[stdout]:' + data + val);
         });
 
         gmv.stderr.on('data', function (data) {
