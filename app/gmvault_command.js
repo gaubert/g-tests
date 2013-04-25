@@ -13,6 +13,11 @@
 
  var cpt            = 0;
  
+// extends String object
+String.prototype.beginsWith = function (string) {
+    return(this.indexOf(string) === 0);
+};
+ 
  /**
   * run the gmvault command
   * @param {type} verb
@@ -28,9 +33,16 @@
      var gmv   = spawn('gmvault', params);
 
         gmv.stdout.on('data', function (data) {
-            global.debug('stdout: ' + data);
+            global.debug('stdout: ' + data.constructor.name);
             var val = $("#mTextArea").val();
-			$("#mTextArea").val('[stdout]:' + data + val);
+            $("#mTextArea").val(val + data);
+            if (data.indexOf('[gmv-msg]:') === 0) {
+                
+               $("#mTextArea").val('[MSG in JS]:' + data.substring(10) + val); 
+                
+            }
+            
+			
         });
 
         gmv.stderr.on('data', function (data) {

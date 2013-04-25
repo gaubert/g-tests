@@ -45,7 +45,8 @@ exports.init = function() {
 	//Add error event listener
 	process.on('uncaughtException', function(e) {
 		mainWindow.show();
-		notifier.throwAppError(e.stack);
+		//notifier.throwAppError(e.stack);
+                global.debug("Exception:" + e.stack);
 	});
 	
 	//rander main window view
