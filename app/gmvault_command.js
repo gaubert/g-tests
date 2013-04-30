@@ -5,6 +5,7 @@
 'use strict';
 
  var fs             = require('fs');
+ var common         = require('./gmv_common.js');
  
  //var gmvaultPath    = '/Users/gaubert/gmvault-v1.8.1/bin/gmvault';
  var gmvaultPath    = '/home/aubert/test_echo.sh';
@@ -13,11 +14,6 @@
  var $              = global.jQuery;
 
  var cpt            = 0;
- 
-// extends String object
-String.prototype.beginsWith = function (string) {
-    return(this.indexOf(string) === 0);
-};
  
  /**
   * run the gmvault command
@@ -31,21 +27,29 @@ String.prototype.beginsWith = function (string) {
      
      var params = [verb].concat(args);
  
-     //var gmv   = spawn('gmvault', params);
      var gmv   = spawn(gmvaultPath, params);
 
      gmv.stdout.on('data', function (data) {
          global.debug('========= stdout: ' + data);
 		 var out = data.toString();
-         var val = $("#mTextArea").val();
+         var msgArea = $("#msgTextArea").val();
+         var logArea = $("#logTextArea").val();
 		 var lines = out.split("\n")
-		 var res = "";
+		 var msg = "";
+		 var log = "";
 		 for (var i=0; i < lines.length; i++) {
-           if (lines[i].indexOf('[gmv-msg]:') === 0) {
-		       res = "[MSG-JS]:" + lines[i].substring(10) + "\n" + res;
+		   global.debug("line = " + lines[i]);
+           if (lines[i].beginsWith('[gmv-msg]:')) {
+		       msg = msg  + lines[i].substring(10) + "\n";
            }
+		   else
+		   {
+		      log = log  + lines[i] + "\n";
+		   }
+		   // need to put only msg in one box and everything else in a second box
 		 }
-         $("#mTextArea").val(res + val); 
+         $("#msgTextArea").val(msgArea + msg); 
+         $("#logTextArea").val(logArea + log); 
 			
      });
 
