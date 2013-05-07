@@ -59,6 +59,7 @@ exports.init = function() {
 	// create buttons
 	$("#runButton").button();
 	$("#stopButton").button();
+        $("#foldButton").button();
 	
 	$("#runButton").click(function (event) {
 	    global.debug("on runButton click");
@@ -71,6 +72,23 @@ exports.init = function() {
 	    global.debug("on stopButton click");
 		gmvault_command.stop(data['pid']);
 	});
+        
+        var foldState = "visible";
+        $("#foldButton").click( function (event) {
+           global.debug("In fold foldState=" + foldState);
+           if ( foldState === "visible")
+           { 
+               $("msgTextArea").hide('fold', 2000); 
+               global.debug("In visible");
+               foldState = "hidden";
+           }
+           else if ( foldState === "hidden")
+           {
+               $("msgTextArea").show('fold', 2000); 
+               global.debug("In hidden");
+               foldState = "visible";    
+           }       
+        });
 
 	mainWindow.show();
 }

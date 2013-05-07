@@ -8,7 +8,8 @@
  var common         = require('./gmv_common.js');
  
  //var gmvaultPath    = '/Users/gaubert/gmvault-v1.8.1/bin/gmvault';
- var gmvaultPath    = '/home/aubert/test_echo.sh';
+ //var gmvaultPath    = '/home/aubert/test_echo.sh';
+ var gmvaultPath    = '/homespace/gaubert/test_echo.sh';
  
  
  var $              = global.jQuery;
@@ -34,18 +35,19 @@
 		 var out = data.toString();
          var msgArea = $("#msgTextArea").val();
          var logArea = $("#logTextArea").val();
-		 var lines = out.split("\n")
+		 var lines = out.split("\n");
 		 var msg = "";
 		 var log = "";
-		 for (var i=0; i < lines.length; i++) {
-		   global.debug("line = " + lines[i]);
-           if (lines[i].beginsWith('[gmv-msg]:')) {
-		       msg = msg  + lines[i].substring(10) + "\n";
-           }
-		   else
-		   {
+		 for (var i=0; i < lines.length; i++) 
+                 {
+		    global.debug("line = " + lines[i]);
+                    if (lines[i].beginsWith('[gmv-msg]:')) {
+                                msg = msg  + lines[i].substring(10) + "\n";
+                    }
+                    else
+		    {
 		      log = log  + lines[i] + "\n";
-		   }
+		    }
 		   // need to put only msg in one box and everything else in a second box
 		 }
          $("#msgTextArea").val(msgArea + msg); 
@@ -84,11 +86,18 @@
   * @param {type} pid 
   */
  function stop(pid) {
-    // get child object
+     
+    if(pid !== undefined) 
+    {   
+        // get child object
 	var child = gmv_childs[pid]; 
-	// add test if error
-
-	child.kill();
+	//child.kill('SIGINT');
+        child.kill();
+    }
+    else
+    {
+        console.log("cannot stop command. pid is undefined");        
+    }
  }
  
  
