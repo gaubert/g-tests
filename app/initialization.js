@@ -17,6 +17,7 @@
 
 /* var	historyDb      = storage.getHistoryDb(), */
  var $              = global.jQuery;
+ var data           = {};
 
 //share global context
 /* global.appConfig = appConfig; */
@@ -49,17 +50,26 @@ exports.init = function() {
                 global.debug("Exception:" + e.stack);
 	});
 	
-	//rander main window view
+	//render main window view
 	renderMainWindow();
 	
 	global.debug("ui loaded ? " + $.ui.version + " End.");
 	global.debug("IN init of initialization");
 	
-	$("#mButton").button();
+	// create buttons
+	$("#runButton").button();
+	$("#stopButton").button();
 	
-	$("#mButton").click(function (event) {
-	    global.debug("on mbutton click");
-	    gmvault_command.run("sync", ["guillaume.aubert@gmail.com", "--chats-only", "-c", "no"]);
+	$("#runButton").click(function (event) {
+	    global.debug("on runButton click");
+	    var pid = gmvault_command.run("sync", ["guillaume.aubert@gmail.com", "--chats-only", "-c", "no"]);
+		data['pid'] = pid;
+		global.debug("pid = " + data['pid']);
+	});
+
+	$("#stopButton").click(function (event) {
+	    global.debug("on stopButton click");
+		gmvault_command.stop(data['pid']);
 	});
 
 	mainWindow.show();

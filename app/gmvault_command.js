@@ -12,8 +12,8 @@
  
  
  var $              = global.jQuery;
-
  var cpt            = 0;
+ var gmv_childs     = {};
  
  /**
   * run the gmvault command
@@ -70,12 +70,27 @@
         });
         
      gmv.on('exit', function(code, signal) {
-            global.debug('gmvault_cmd.run[exit event]:' + code + " signal=" + signal);
+            global.debug('gmvault_cmd.run[exit event]:' + code + "received signal=" + signal);
         });
-        
+
+	 gmv_childs[gmv.pid] = gmv ;
         
      return gmv.pid;
  
  }
+
+ /**
+  * stop the gmvault command
+  * @param {type} pid 
+  */
+ function stop(pid) {
+    // get child object
+	var child = gmv_childs[pid]; 
+	// add test if error
+
+	child.kill();
+ }
  
- exports.run = run;
+ 
+ exports.run  = run;
+ exports.stop = stop;
