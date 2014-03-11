@@ -8,8 +8,8 @@
  var common         = require('./gmv_common.js');
  
  //var gmvaultPath    = '/Users/gaubert/gmvault-v1.8.1/bin/gmvault';
- //var gmvaultPath    = '/home/aubert/test_echo.sh';
- var gmvaultPath    = '/homespace/gaubert/test_echo.sh';
+ var gmvaultPath    = '/home/aubert/test_echo.sh';
+ //var gmvaultPath    = '/homespace/gaubert/test_echo.sh';
  
  
  var $              = global.jQuery;
